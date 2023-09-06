@@ -1,18 +1,22 @@
-# Your final project name goes here
+# CTF lab
 
-# Your team member names and uic emails go here
+# Jyotirmay - jchauh3 @ uic dot edu
 
-# Your GitHub repository link goes here
-If you have a private repository, please add `kaytwo` and `sauravjoshi` as collaborators.
+# Repo: https://github.com/Jaycee3004/ctf.git
+
 
 ## What does your application do?
+Capture The Flag !!!
 
+Taking inpiration from Juice-shop and Hack-the-box, this application will allow users to practise their skills on a vulnerable web-app. I plan to implement a subset of the OWASP top-ten vulnerabilities alsongside some non-web secuirty stuff that I haven't figured out yet.
 
 ## What makes it different than a CRUD app? I.e., what functionality does it provide that is not just a user interface layer on top of a database of user information,and the ability to view / add to / change that information?
 
+This app would be significantly different from a CRUD app because it main functionality is centered around finding vulnerabilities in the  application. The program will however maintain a score board which be utilizing the CRUD functionality to store the user progress through the challenges
+
 ## What security and privacy concerns do you expect you (as developers) or your users to have with this application?
-
-
+the main concern would be that users shouldn't be able to find vulnerabilites besides ones which are intentially put there.
+Vulnerabilites which can help game the scoring system would important to address.
 
 ### This repository
 
