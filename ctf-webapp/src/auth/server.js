@@ -5,7 +5,7 @@ const app = express();
 
 const port = 3000;
 
-// app.use(express.json())
+app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 
@@ -18,15 +18,15 @@ app.use(cors(corsOptions));
 app.get('/api/hello', (req, res) => {
     res.json({hello:"world"}).status(200)
 });
-app.post('/login', (req, res) => {
+app.post('/login/', (req, res) => {
     
     // console.log(req);
     const { username, password } = req.body;
-    // console.log(req.body);
+    console.log(req.body);
     
-    console.log(username, password);
+    // console.log(username, password);
 
-    res.status(200).send(JSON.stringify({username:password}));
+    res.status(200).send(JSON.stringify({"username": username, "password": password}));
 });
 
 

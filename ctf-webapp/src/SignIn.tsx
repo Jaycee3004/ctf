@@ -1,6 +1,6 @@
-import {Routes,Route} from 'react-router-dom';
+// import {Routes,Route} from 'react-router-dom';
 import Cookies from 'js-cookie';
-import cors from 'cors';
+
 
 // import { useEffect } from 'react';
 
@@ -22,18 +22,24 @@ export default function SignIn() {
         const form = e.currentTarget;
         const username = form.username?.value;
         const password = form.password?.value;
+
+        console.log(username);
+        console.log(password);
         fetch('http://localhost:3000/login/', {
             method: 'POST',
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({username,password})
+            body: JSON.stringify({"username":username,"password":password})
         }).then((response) => {response.json().then((data) => {
             console.log(data);
             return data;
         })
+
+        Cookies.set('authenticated', 'true', { expires: 7 });
     })
+
         
         console.log("Fetch complete");
         
