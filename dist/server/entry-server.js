@@ -162,14 +162,29 @@ function Register() {
     /* @__PURE__ */ jsx(Link, { to: "/signin", children: "SignIn" })
   ] });
 }
+const pages = /* @__PURE__ */ Object.assign({});
+console.log(pages);
+const routes = Object.keys(pages).map((path) => {
+  const name = path.match(/\.\/pages\/(.*)\.jsx$/)[1];
+  return {
+    name,
+    path: name === "Home" ? "/" : `/${name.toLowerCase()}`,
+    component: pages[path].default
+  };
+});
 function App() {
-  return /* @__PURE__ */ jsx(Fragment, { children: /* @__PURE__ */ jsxs(Routes, { children: [
-    /* @__PURE__ */ jsx(Route, { path: "/", element: /* @__PURE__ */ jsx(MyComponent, {}) }, "/"),
-    /* @__PURE__ */ jsx(Route, { path: "/about", element: /* @__PURE__ */ jsx(About, {}) }, "/about"),
-    /* @__PURE__ */ jsx(Route, { path: "/env", element: /* @__PURE__ */ jsx(Env, {}) }, "/env"),
-    /* @__PURE__ */ jsx(Route, { path: "/signin", element: /* @__PURE__ */ jsx(SignIn, {}) }, "/signin"),
-    /* @__PURE__ */ jsx(Route, { path: "/register", element: /* @__PURE__ */ jsx(Register, {}) }, "/register")
-  ] }) });
+  return /* @__PURE__ */ jsxs(Fragment, { children: [
+    /* @__PURE__ */ jsx("nav", { children: /* @__PURE__ */ jsx("ul", { children: routes.map(({ name, path }) => {
+      return /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx(Link, { to: path, children: name }) }, path);
+    }) }) }),
+    /* @__PURE__ */ jsxs(Routes, { children: [
+      /* @__PURE__ */ jsx(Route, { path: "/", element: /* @__PURE__ */ jsx(MyComponent, {}) }, "/"),
+      /* @__PURE__ */ jsx(Route, { path: "/about", element: /* @__PURE__ */ jsx(About, {}) }, "/about"),
+      /* @__PURE__ */ jsx(Route, { path: "/env", element: /* @__PURE__ */ jsx(Env, {}) }, "/env"),
+      /* @__PURE__ */ jsx(Route, { path: "/signin", element: /* @__PURE__ */ jsx(SignIn, {}) }, "/signin"),
+      /* @__PURE__ */ jsx(Route, { path: "/register", element: /* @__PURE__ */ jsx(Register, {}) }, "/register")
+    ] })
+  ] });
 }
 console.log("Server side rendering");
 function render(url, context) {

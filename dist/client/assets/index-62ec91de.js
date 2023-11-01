@@ -7895,7 +7895,7 @@ var ResultType;
   ResultType2["redirect"] = "redirect";
   ResultType2["error"] = "error";
 })(ResultType || (ResultType = {}));
-function matchRoutes(routes, locationArg, basename2) {
+function matchRoutes(routes2, locationArg, basename2) {
   if (basename2 === void 0) {
     basename2 = "/";
   }
@@ -7904,7 +7904,7 @@ function matchRoutes(routes, locationArg, basename2) {
   if (pathname == null) {
     return null;
   }
-  let branches = flattenRoutes(routes);
+  let branches = flattenRoutes(routes2);
   rankRouteBranches(branches);
   let matches = null;
   for (let i = 0; matches == null && i < branches.length; ++i) {
@@ -7921,7 +7921,7 @@ function matchRoutes(routes, locationArg, basename2) {
   }
   return matches;
 }
-function flattenRoutes(routes, branches, parentsMeta, parentPath) {
+function flattenRoutes(routes2, branches, parentsMeta, parentPath) {
   if (branches === void 0) {
     branches = [];
   }
@@ -7962,7 +7962,7 @@ function flattenRoutes(routes, branches, parentsMeta, parentPath) {
       routesMeta
     });
   };
-  routes.forEach((route, index2) => {
+  routes2.forEach((route, index2) => {
     var _route$path;
     if (route.path === "" || !((_route$path = route.path) != null && _route$path.includes("?"))) {
       flattenRoute(route, index2);
@@ -8370,10 +8370,10 @@ function useResolvedPath(to, _temp2) {
   let routePathnamesJson = JSON.stringify(getPathContributingMatches(matches).map((match) => match.pathnameBase));
   return reactExports.useMemo(() => resolveTo(to, JSON.parse(routePathnamesJson), locationPathname, relative === "path"), [to, routePathnamesJson, locationPathname, relative]);
 }
-function useRoutes(routes, locationArg) {
-  return useRoutesImpl(routes, locationArg);
+function useRoutes(routes2, locationArg) {
+  return useRoutesImpl(routes2, locationArg);
 }
-function useRoutesImpl(routes, locationArg, dataRouterState) {
+function useRoutesImpl(routes2, locationArg, dataRouterState) {
   !useInRouterContext() ? invariant(false) : void 0;
   let {
     navigator: navigator2
@@ -8398,7 +8398,7 @@ function useRoutesImpl(routes, locationArg, dataRouterState) {
   }
   let pathname = location.pathname || "/";
   let remainingPathname = parentPathnameBase === "/" ? pathname : pathname.slice(parentPathnameBase.length) || "/";
-  let matches = matchRoutes(routes, {
+  let matches = matchRoutes(routes2, {
     pathname: remainingPathname
   });
   let renderedMatches = _renderMatches(matches && matches.map((match) => Object.assign({}, match, {
@@ -8711,14 +8711,14 @@ function createRoutesFromChildren(children, parentPath) {
   if (parentPath === void 0) {
     parentPath = [];
   }
-  let routes = [];
+  let routes2 = [];
   reactExports.Children.forEach(children, (element, index2) => {
     if (!/* @__PURE__ */ reactExports.isValidElement(element)) {
       return;
     }
     let treePath = [...parentPath, index2];
     if (element.type === reactExports.Fragment) {
-      routes.push.apply(routes, createRoutesFromChildren(element.props.children, treePath));
+      routes2.push.apply(routes2, createRoutesFromChildren(element.props.children, treePath));
       return;
     }
     !(element.type === Route) ? invariant(false) : void 0;
@@ -8742,9 +8742,9 @@ function createRoutesFromChildren(children, parentPath) {
     if (element.props.children) {
       route.children = createRoutesFromChildren(element.props.children, treePath);
     }
-    routes.push(route);
+    routes2.push(route);
   });
-  return routes;
+  return routes2;
 }
 /**
  * React Router DOM v6.18.0
@@ -51266,14 +51266,29 @@ function Register() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { to: "/signin", children: "SignIn" })
   ] });
 }
+const pages = /* @__PURE__ */ Object.assign({});
+console.log(pages);
+const routes = Object.keys(pages).map((path2) => {
+  const name2 = path2.match(/\.\/pages\/(.*)\.jsx$/)[1];
+  return {
+    name: name2,
+    path: name2 === "Home" ? "/" : `/${name2.toLowerCase()}`,
+    component: pages[path2].default
+  };
+});
 function App() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Routes, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "/", element: /* @__PURE__ */ jsxRuntimeExports.jsx(MyComponent, {}) }, "/"),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "/about", element: /* @__PURE__ */ jsxRuntimeExports.jsx(About, {}) }, "/about"),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "/env", element: /* @__PURE__ */ jsxRuntimeExports.jsx(Env, {}) }, "/env"),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "/signin", element: /* @__PURE__ */ jsxRuntimeExports.jsx(SignIn, {}) }, "/signin"),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "/register", element: /* @__PURE__ */ jsxRuntimeExports.jsx(Register, {}) }, "/register")
-  ] }) });
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { children: routes.map(({ name: name2, path: path2 }) => {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { to: path2, children: name2 }) }, path2);
+    }) }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(Routes, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "/", element: /* @__PURE__ */ jsxRuntimeExports.jsx(MyComponent, {}) }, "/"),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "/about", element: /* @__PURE__ */ jsxRuntimeExports.jsx(About, {}) }, "/about"),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "/env", element: /* @__PURE__ */ jsxRuntimeExports.jsx(Env, {}) }, "/env"),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "/signin", element: /* @__PURE__ */ jsxRuntimeExports.jsx(SignIn, {}) }, "/signin"),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "/register", element: /* @__PURE__ */ jsxRuntimeExports.jsx(Register, {}) }, "/register")
+    ] })
+  ] });
 }
 console.log("Client side rendering");
 client.hydrateRoot(

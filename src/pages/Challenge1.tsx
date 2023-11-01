@@ -37,10 +37,9 @@ export default function MyComponent() {
         <p>This technique will constantly clear the console, making it harder to debug JavaScript code via console.log and similar functions.</p>
 
         <p><b>Experiment:</b></p>
-        <p>Just open the DevTools.</p>
+        <p>Just TRY to open the DevTools.</p>
 
-        <p><b>Impact:</b></p>
-        <p>As it can be circumvented by setting the "Preserve log" function, its impact is only minor.</p>
+        
       </div>
     </>
   );

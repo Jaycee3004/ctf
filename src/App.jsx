@@ -6,20 +6,31 @@ import Env from './pages/Env'
 import SignIn from './pages/SignIn'
 import Register from './pages/Register'
 
-// const pages = import.meta.glob('./pages/*.jsx', { eager: true })
-// console.log(pages)
-// const routes = Object.keys(pages).map((path) => {
-//   const name = path.match(/\.\/pages\/(.*)\.jsx$/)[1]
-//   return {
-//     name,
-//     path: name === 'Home' ? '/' : `/${name.toLowerCase()}`,
-//     component: pages[path].default,
-//   }
-// })
+const pages = import.meta.glob('./pages/*.jsx', { eager: true })
+console.log(pages)
+const routes = Object.keys(pages).map((path) => {
+  const name = path.match(/\.\/pages\/(.*)\.jsx$/)[1]
+  return {
+    name,
+    path: name === 'Home' ? '/' : `/${name.toLowerCase()}`,
+    component: pages[path].default,
+  }
+})
 
 export function App() {
   return (
     <>
+    <nav>
+        <ul>
+          {routes.map(({ name, path }) => {
+            return (
+              <li key={path}>
+                <Link to={path}>{name}</Link>
+              </li>
+            )
+          })}
+        </ul>
+      </nav>
       <Routes>
         <Route key={"/"} path="/" element={<Challenge1/>} />
         <Route key={"/about"} path="/about" element={<About/>} />
