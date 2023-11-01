@@ -3,7 +3,7 @@
 # Jyotirmay - jchauh3 @ uic dot edu
 
 # Repo: https://github.com/Jaycee3004/ctf.git
-
+# Deploy: ctf-gwjc9zdwd-jaycee3004.vercel.app
 
 ## What does your application do?
 Capture The Flag !!!
