@@ -4,10 +4,11 @@ import ReactDOM from 'react-dom';
 
 import Cookies from 'js-cookie';
 import ReactDOMServer from 'react-dom/server';
+import { FormEvent } from 'react';
 
 // import auth from './auth/auth.tsx';
 
-import { useState, useEffect, FormEvent, useRef} from 'react';
+import { useState, useEffect, useRef} from 'react';
 
 export default function SignIn(){
   const [username, setUsername] = useState('');
@@ -15,18 +16,17 @@ export default function SignIn(){
   const loginFormRef = useRef<HTMLFormElement>(null)
 
 
-  const handleSubmit = async (e: ReactDOM.FormEvent<HTMLFormElement>) => {
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
-    
 
     console.log(username);
     console.log(password);
     // console.log(checkCred(username, password));
-      // console.log(loginForm.username);
-      // console.log(loginForm.password);
+    // console.log(loginForm.username);
+    // console.log(loginForm.password);
 
-      // const form = document.getElementById('loginForm') as HTMLFormElement;
+    // const form = document.getElementById('loginForm') as HTMLFormElement;
   }
 
 //   form.addEventListener('submit', async (e: Event) => {

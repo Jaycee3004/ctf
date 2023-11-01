@@ -9,7 +9,7 @@ import { app } from "../firebase/server";
 
 // import auth from './auth/auth.tsx';
 
-import { useState, useEffect, FormEvent, useRef} from 'react';
+import { useState, useEffect, useRef} from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Register(){
@@ -20,7 +20,7 @@ export default function Register(){
     // console.log("auth: ", auth);
     console.log(username);
     console.log(password);
-    const handleSubmit = async (e: ReactDOM.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e ) => {
         e.preventDefault();
         console.log("Reaching here");
         
