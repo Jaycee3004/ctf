@@ -1,8 +1,7 @@
 // import {Routes,Route} from 'react-router-dom';
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import  FormEvent from 'react';
-import checkCred from '../checkCred';
+
 import Cookies from 'js-cookie';
 import ReactDOMServer from 'react-dom/server';
 
@@ -23,7 +22,7 @@ export default function SignIn(){
 
     console.log(username);
     console.log(password);
-    console.log(checkCred(username, password));
+    // console.log(checkCred(username, password));
       // console.log(loginForm.username);
       // console.log(loginForm.password);
 
