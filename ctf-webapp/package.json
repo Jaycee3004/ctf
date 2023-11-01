@@ -1,6 +1,5 @@
 {
-  "name": "@vitejs/test-ssr-react",
-  "private": true,
+  "name": "ctf-webapp",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
@@ -14,7 +13,9 @@
   },
   "dependencies": {
     "@types/js-cookie": "^3.0.5",
+    "firebase": "^10.5.2",
     "js-cookie": "^3.0.5",
+    "package.json": "^2.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.17.0"

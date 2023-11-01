@@ -2,8 +2,9 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import ReactDOMServer from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server.mjs";
 import { Routes, Route } from "react-router-dom";
-import Cookies from "js-cookie";
-import { useState } from "react";
+import fs from "fs";
+import path from "path";
+import { useState, useRef } from "react";
 function multiply(a, b) {
   return a * b;
 }
@@ -38,21 +39,30 @@ function Env() {
   }
   return /* @__PURE__ */ jsx("h1", { children: msg });
 }
+function checkCred(username, password) {
+  const p = path.resolve(__dirname, "./../data/userData.json");
+  const data = fs.readFileSync(p).toString();
+  const userData = JSON.parse(data);
+  for (const user of userData.users) {
+    if (user.username === username && user.password === password) {
+      return true;
+    }
+  }
+  return false;
+}
 function SignIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const form = document.getElementById("loginForm");
-  form.addEventListener("submit", async (e) => {
+  const loginFormRef = useRef(null);
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted");
     console.log(username);
     console.log(password);
-    Cookies.set("authenticated", "true", { expires: 7 });
-    console.log("Fetch complete");
-  });
+    console.log(checkCred(username, password));
+  };
   return /* @__PURE__ */ jsxs("div", { children: [
     /* @__PURE__ */ jsx("h1", { children: "Sign In" }),
-    /* @__PURE__ */ jsxs("form", { id: "loginForm", children: [
+    /* @__PURE__ */ jsxs("form", { id: "loginForm", ref: loginFormRef, onSubmit: handleSubmit, children: [
       /* @__PURE__ */ jsx(
         "input",
         {
