@@ -1,35 +1,12 @@
-import { jsxs, Fragment, jsx } from "react/jsx-runtime";
+import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import ReactDOMServer from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server.mjs";
 import { Routes, Route } from "react-router-dom";
 import fs from "fs";
 import path from "path";
 import { useState, useRef } from "react";
-function multiply(a, b) {
-  return a * b;
-}
-function multiplyAndAdd(a, b, c) {
-  return add(multiply(a, b), c);
-}
-function add(a, b) {
-  return a + b;
-}
-function addAndMultiply(a, b, c) {
-  return multiply(add(a, b), c);
-}
-function Home() {
-  return /* @__PURE__ */ jsxs(Fragment, { children: [
-    /* @__PURE__ */ jsx("h1", { children: "Home" }),
-    /* @__PURE__ */ jsx("div", { children: addAndMultiply(1, 2, 3) }),
-    /* @__PURE__ */ jsx("div", { children: multiplyAndAdd(1, 2, 3) })
-  ] });
-}
 function About() {
-  return /* @__PURE__ */ jsxs(Fragment, { children: [
-    /* @__PURE__ */ jsx("h1", { children: "About" }),
-    /* @__PURE__ */ jsx("div", { children: addAndMultiply(1, 2, 3) }),
-    /* @__PURE__ */ jsx("div", { children: multiplyAndAdd(1, 2, 3) })
-  ] });
+  return /* @__PURE__ */ jsx(Fragment, { children: /* @__PURE__ */ jsx("h1", { children: "About" }) });
 }
 function Env() {
   let msg = "default message here";
@@ -87,7 +64,6 @@ function SignIn() {
 }
 function App() {
   return /* @__PURE__ */ jsx(Fragment, { children: /* @__PURE__ */ jsxs(Routes, { children: [
-    /* @__PURE__ */ jsx(Route, { path: "/", element: /* @__PURE__ */ jsx(Home, {}) }, "/"),
     /* @__PURE__ */ jsx(Route, { path: "/about", element: /* @__PURE__ */ jsx(About, {}) }, "/about"),
     /* @__PURE__ */ jsx(Route, { path: "/env", element: /* @__PURE__ */ jsx(Env, {}) }, "/env"),
     /* @__PURE__ */ jsx(Route, { path: "/signin", element: /* @__PURE__ */ jsx(SignIn, {}) }, "/signin")

@@ -1,5 +1,5 @@
 import { Link, Route, Routes } from 'react-router-dom'
-import Home from './pages/Home'
+// import Home from './pages/Home'
 import About from './pages/About'
 import Env from './pages/Env'
 import SignIn from './pages/SignIn'
@@ -30,7 +30,7 @@ export function App() {
         </ul>
       </nav> */}
       <Routes>
-        <Route key={"/"} path="/" element={<Home/>} />
+        {/* <Route key={"/"} path="/" element={<Home/>} /> */}
         <Route key={"/about"} path="/about" element={<About/>} />
         <Route key={"/env"} path="/env" element={<Env/>} />
         <Route key={"/signin"} path="/signin" element={<SignIn/>} />

@@ -8581,31 +8581,8 @@ var DataRouterStateHook;
   DataRouterStateHook2["UseFetchers"] = "useFetchers";
   DataRouterStateHook2["UseScrollRestoration"] = "useScrollRestoration";
 })(DataRouterStateHook || (DataRouterStateHook = {}));
-function multiply(a, b) {
-  return a * b;
-}
-function multiplyAndAdd(a, b, c) {
-  return add(multiply(a, b), c);
-}
-function add(a, b) {
-  return a + b;
-}
-function addAndMultiply(a, b, c) {
-  return multiply(add(a, b), c);
-}
-function Home() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { children: "Home" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: addAndMultiply(1, 2, 3) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: multiplyAndAdd(1, 2, 3) })
-  ] });
-}
 function About() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { children: "About" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: addAndMultiply(1, 2, 3) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: multiplyAndAdd(1, 2, 3) })
-  ] });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { children: "About" }) });
 }
 function Env() {
   let msg = "default message here";
@@ -8664,7 +8641,6 @@ function SignIn() {
 }
 function App() {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Routes, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "/", element: /* @__PURE__ */ jsxRuntimeExports.jsx(Home, {}) }, "/"),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "/about", element: /* @__PURE__ */ jsxRuntimeExports.jsx(About, {}) }, "/about"),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "/env", element: /* @__PURE__ */ jsxRuntimeExports.jsx(Env, {}) }, "/env"),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "/signin", element: /* @__PURE__ */ jsxRuntimeExports.jsx(SignIn, {}) }, "/signin")
