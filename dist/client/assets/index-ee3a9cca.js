@@ -10789,7 +10789,7 @@ const firebaseConfig = {
   messagingSenderId: "140992120654",
   appId: "1:140992120654:web:3bab9b38ec0a725a23001f"
 };
-initializeApp$1(firebaseConfig);
+const app$2 = initializeApp$1(firebaseConfig);
 var auth$1 = {};
 var app$1 = {};
 var utils$4 = {};
@@ -19777,10 +19777,10 @@ function requireBaseN() {
   if (hasRequiredBaseN)
     return baseN;
   hasRequiredBaseN = 1;
-  var api = {};
-  baseN = api;
+  var api2 = {};
+  baseN = api2;
   var _reverseAlphabets = {};
-  api.encode = function(input, alphabet, maxline) {
+  api2.encode = function(input, alphabet, maxline) {
     if (typeof alphabet !== "string") {
       throw new TypeError('"alphabet" must be a string.');
     }
@@ -19819,7 +19819,7 @@ function requireBaseN() {
     }
     return output;
   };
-  api.decode = function(input, alphabet) {
+  api2.decode = function(input, alphabet) {
     if (typeof input !== "string") {
       throw new TypeError('"input" must be a string.');
     }
@@ -20873,8 +20873,8 @@ function requireUtil() {
   util2.text.utf16.decode = function(bytes) {
     return String.fromCharCode.apply(null, new Uint16Array(bytes.buffer));
   };
-  util2.deflate = function(api, bytes, raw) {
-    bytes = util2.decode64(api.deflate(util2.encode64(bytes)).rval);
+  util2.deflate = function(api2, bytes, raw) {
+    bytes = util2.decode64(api2.deflate(util2.encode64(bytes)).rval);
     if (raw) {
       var start = 2;
       var flg = bytes.charCodeAt(1);
@@ -20885,20 +20885,20 @@ function requireUtil() {
     }
     return bytes;
   };
-  util2.inflate = function(api, bytes, raw) {
-    var rval = api.inflate(util2.encode64(bytes)).rval;
+  util2.inflate = function(api2, bytes, raw) {
+    var rval = api2.inflate(util2.encode64(bytes)).rval;
     return rval === null ? null : util2.decode64(rval);
   };
-  var _setStorageObject = function(api, id2, obj) {
-    if (!api) {
+  var _setStorageObject = function(api2, id2, obj) {
+    if (!api2) {
       throw new Error("WebStorage not available.");
     }
     var rval;
     if (obj === null) {
-      rval = api.removeItem(id2);
+      rval = api2.removeItem(id2);
     } else {
       obj = util2.encode64(JSON.stringify(obj));
-      rval = api.setItem(id2, obj);
+      rval = api2.setItem(id2, obj);
     }
     if (typeof rval !== "undefined" && rval.rval !== true) {
       var error2 = new Error(rval.error.message);
@@ -20907,12 +20907,12 @@ function requireUtil() {
       throw error2;
     }
   };
-  var _getStorageObject = function(api, id2) {
-    if (!api) {
+  var _getStorageObject = function(api2, id2) {
+    if (!api2) {
       throw new Error("WebStorage not available.");
     }
-    var rval = api.getItem(id2);
-    if (api.init) {
+    var rval = api2.getItem(id2);
+    if (api2.init) {
       if (rval.rval === null) {
         if (rval.error) {
           var error2 = new Error(rval.error.message);
@@ -20930,23 +20930,23 @@ function requireUtil() {
     }
     return rval;
   };
-  var _setItem = function(api, id2, key, data) {
-    var obj = _getStorageObject(api, id2);
+  var _setItem = function(api2, id2, key, data) {
+    var obj = _getStorageObject(api2, id2);
     if (obj === null) {
       obj = {};
     }
     obj[key] = data;
-    _setStorageObject(api, id2, obj);
+    _setStorageObject(api2, id2, obj);
   };
-  var _getItem = function(api, id2, key) {
-    var rval = _getStorageObject(api, id2);
+  var _getItem = function(api2, id2, key) {
+    var rval = _getStorageObject(api2, id2);
     if (rval !== null) {
       rval = key in rval ? rval[key] : null;
     }
     return rval;
   };
-  var _removeItem = function(api, id2, key) {
-    var obj = _getStorageObject(api, id2);
+  var _removeItem = function(api2, id2, key) {
+    var obj = _getStorageObject(api2, id2);
     if (obj !== null && key in obj) {
       delete obj[key];
       var empty = true;
@@ -20957,11 +20957,11 @@ function requireUtil() {
       if (empty) {
         obj = null;
       }
-      _setStorageObject(api, id2, obj);
+      _setStorageObject(api2, id2, obj);
     }
   };
-  var _clearItems = function(api, id2) {
-    _setStorageObject(api, id2, null);
+  var _clearItems = function(api2, id2) {
+    _setStorageObject(api2, id2, null);
   };
   var _callStorageFunction = function(func, args, location) {
     var rval = null;
@@ -20998,16 +20998,16 @@ function requireUtil() {
     }
     return rval;
   };
-  util2.setItem = function(api, id2, key, data, location) {
+  util2.setItem = function(api2, id2, key, data, location) {
     _callStorageFunction(_setItem, arguments, location);
   };
-  util2.getItem = function(api, id2, key, location) {
+  util2.getItem = function(api2, id2, key, location) {
     return _callStorageFunction(_getItem, arguments, location);
   };
-  util2.removeItem = function(api, id2, key, location) {
+  util2.removeItem = function(api2, id2, key, location) {
     _callStorageFunction(_removeItem, arguments, location);
   };
-  util2.clearItems = function(api, id2, location) {
+  util2.clearItems = function(api2, id2, location) {
     _callStorageFunction(_clearItems, arguments, location);
   };
   util2.isEmpty = function(obj) {
@@ -21277,35 +21277,35 @@ function requireCipher() {
   cipher = forge2.cipher = forge2.cipher || {};
   forge2.cipher.algorithms = forge2.cipher.algorithms || {};
   forge2.cipher.createCipher = function(algorithm, key) {
-    var api = algorithm;
-    if (typeof api === "string") {
-      api = forge2.cipher.getAlgorithm(api);
-      if (api) {
-        api = api();
+    var api2 = algorithm;
+    if (typeof api2 === "string") {
+      api2 = forge2.cipher.getAlgorithm(api2);
+      if (api2) {
+        api2 = api2();
       }
     }
-    if (!api) {
+    if (!api2) {
       throw new Error("Unsupported algorithm: " + algorithm);
     }
     return new forge2.cipher.BlockCipher({
-      algorithm: api,
+      algorithm: api2,
       key,
       decrypt: false
     });
   };
   forge2.cipher.createDecipher = function(algorithm, key) {
-    var api = algorithm;
-    if (typeof api === "string") {
-      api = forge2.cipher.getAlgorithm(api);
-      if (api) {
-        api = api();
+    var api2 = algorithm;
+    if (typeof api2 === "string") {
+      api2 = forge2.cipher.getAlgorithm(api2);
+      if (api2) {
+        api2 = api2();
       }
     }
-    if (!api) {
+    if (!api2) {
       throw new Error("Unsupported algorithm: " + algorithm);
     }
     return new forge2.cipher.BlockCipher({
-      algorithm: api,
+      algorithm: api2,
       key,
       decrypt: true
     });
@@ -40871,12 +40871,12 @@ projectConfig.ProjectConfig = ProjectConfig;
      *     URL path.
      * @returns The corresponding resource URL.
      */
-    getUrl(api, params) {
+    getUrl(api2, params) {
       return this.getProjectId().then((projectId) => {
         const baseParams = {
           version: this.version,
           projectId,
-          api: api || ""
+          api: api2 || ""
         };
         const baseUrl = utils2.formatString(this.urlFormat, baseParams);
         return utils2.formatString(baseUrl, params || {});
@@ -40925,8 +40925,8 @@ projectConfig.ProjectConfig = ProjectConfig;
      *     URL path.
      * @returns The corresponding resource URL.
      */
-    getUrl(api, params) {
-      return super.getUrl(api, params).then((url2) => {
+    getUrl(api2, params) {
+      return super.getUrl(api2, params).then((url2) => {
         return utils2.formatString(url2, { tenantId: this.tenantId });
       });
     }
@@ -50815,36 +50815,46 @@ function init(converter, defaultAttributes) {
     }
   );
 }
-init(defaultConverter, { path: "/" });
-function clear() {
-  console.clear();
-}
-function MyComponent() {
-  reactExports.useEffect(() => {
-    setInterval(clear, 1);
-    function handleKeydown(event) {
-      console.log(event);
-      if (event.key === "F12" || (event.ctrlKey || event.altKey) && (event.code === "KeyI" || event.key === "KeyJ" || event.key === "KeyU")) {
-        event.preventDefault();
-        return false;
+var api = init(defaultConverter, { path: "/" });
+async function checkSessionCookie(isAuthenticated, setIsAuthenticated) {
+  try {
+    console.log("Reaching here Huh!");
+    const auth2 = await getAuth(app$2);
+    if (api.get("session")) {
+      const sessionCookie = api.get("session");
+      const decodedCookie = await auth2.verifySessionCookie(sessionCookie);
+      if (decodedCookie) {
+        setIsAuthenticated(1);
+      } else {
+        console.log(" Session cookies not verified");
+        setIsAuthenticated(-1);
       }
+    } else {
+      console.log("Error: NO cookies AT ALL");
+      setIsAuthenticated(-1);
     }
-    function handleContextmenu(event) {
-      event.preventDefault();
-      return false;
-    }
-    window.addEventListener("keydown", handleKeydown, true);
-    window.addEventListener("contextmenu", handleContextmenu, true);
+  } catch (error2) {
+    console.log("Error verifying session cookie:", error2);
+    setIsAuthenticated(-1);
+  }
+}
+function Home() {
+  const [isAuthenticated, setIsAuthenticated] = reactExports.useState(0);
+  useNavigate();
+  reactExports.useEffect(() => {
+    checkSessionCookie(isAuthenticated, setIsAuthenticated);
   }, []);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { children: "ConClear" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("b", { children: "Description:" }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This technique will constantly clear the console, making it harder to debug JavaScript code via console.log and similar functions." }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("b", { children: "Experiment:" }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Just open the DevTools." }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("b", { children: "Impact:" }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: 'As it can be circumvented by setting the "Preserve log" function, its impact is only minor.' })
-  ] }) });
+  if (isAuthenticated === 0 && api.get("session")) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "Loading..." });
+  }
+  if (isAuthenticated === 1 && api.get("session")) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { children: "Home" }) });
+  } else {
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { children: "Home not found" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { to: "/signin", children: "SignIn" })
+    ] });
+  }
 }
 function About() {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { children: "About" }) });
@@ -51282,7 +51292,7 @@ function App() {
       return /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { to: path2, children: name2 }) }, path2);
     }) }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs(Routes, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "/", element: /* @__PURE__ */ jsxRuntimeExports.jsx(MyComponent, {}) }, "/"),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "/", element: /* @__PURE__ */ jsxRuntimeExports.jsx(Home, {}) }, "/"),
       /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "/about", element: /* @__PURE__ */ jsxRuntimeExports.jsx(About, {}) }, "/about"),
       /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "/env", element: /* @__PURE__ */ jsxRuntimeExports.jsx(Env, {}) }, "/env"),
       /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "/signin", element: /* @__PURE__ */ jsxRuntimeExports.jsx(SignIn, {}) }, "/signin"),

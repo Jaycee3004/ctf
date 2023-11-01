@@ -1,11 +1,11 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import ReactDOMServer from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server.mjs";
-import { Link, Routes, Route } from "react-router-dom";
-import { useEffect, useState, useRef } from "react";
+import { useNavigate, Link, Routes, Route } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase-admin/auth";
-import "js-cookie";
+import Cookies from "js-cookie";
 import { initializeApp as initializeApp$1, cert } from "firebase-admin/app";
 import { config } from "dotenv";
 const firebaseConfig = {
@@ -16,36 +16,46 @@ const firebaseConfig = {
   messagingSenderId: "140992120654",
   appId: "1:140992120654:web:3bab9b38ec0a725a23001f"
 };
-initializeApp(firebaseConfig);
-function clear() {
-  console.clear();
-}
-function MyComponent() {
-  useEffect(() => {
-    setInterval(clear, 1);
-    function handleKeydown(event) {
-      console.log(event);
-      if (event.key === "F12" || (event.ctrlKey || event.altKey) && (event.code === "KeyI" || event.key === "KeyJ" || event.key === "KeyU")) {
-        event.preventDefault();
-        return false;
+const app$1 = initializeApp(firebaseConfig);
+async function checkSessionCookie(isAuthenticated, setIsAuthenticated) {
+  try {
+    console.log("Reaching here Huh!");
+    const auth = await getAuth(app$1);
+    if (Cookies.get("session")) {
+      const sessionCookie = Cookies.get("session");
+      const decodedCookie = await auth.verifySessionCookie(sessionCookie);
+      if (decodedCookie) {
+        setIsAuthenticated(1);
+      } else {
+        console.log(" Session cookies not verified");
+        setIsAuthenticated(-1);
       }
+    } else {
+      console.log("Error: NO cookies AT ALL");
+      setIsAuthenticated(-1);
     }
-    function handleContextmenu(event) {
-      event.preventDefault();
-      return false;
-    }
-    window.addEventListener("keydown", handleKeydown, true);
-    window.addEventListener("contextmenu", handleContextmenu, true);
+  } catch (error) {
+    console.log("Error verifying session cookie:", error);
+    setIsAuthenticated(-1);
+  }
+}
+function Home() {
+  const [isAuthenticated, setIsAuthenticated] = useState(0);
+  useNavigate();
+  useEffect(() => {
+    checkSessionCookie(isAuthenticated, setIsAuthenticated);
   }, []);
-  return /* @__PURE__ */ jsx(Fragment, { children: /* @__PURE__ */ jsxs("div", { children: [
-    /* @__PURE__ */ jsx("h1", { children: "ConClear" }),
-    /* @__PURE__ */ jsx("p", { children: /* @__PURE__ */ jsx("b", { children: "Description:" }) }),
-    /* @__PURE__ */ jsx("p", { children: "This technique will constantly clear the console, making it harder to debug JavaScript code via console.log and similar functions." }),
-    /* @__PURE__ */ jsx("p", { children: /* @__PURE__ */ jsx("b", { children: "Experiment:" }) }),
-    /* @__PURE__ */ jsx("p", { children: "Just open the DevTools." }),
-    /* @__PURE__ */ jsx("p", { children: /* @__PURE__ */ jsx("b", { children: "Impact:" }) }),
-    /* @__PURE__ */ jsx("p", { children: 'As it can be circumvented by setting the "Preserve log" function, its impact is only minor.' })
-  ] }) });
+  if (isAuthenticated === 0 && Cookies.get("session")) {
+    return /* @__PURE__ */ jsx("div", { children: "Loading..." });
+  }
+  if (isAuthenticated === 1 && Cookies.get("session")) {
+    return /* @__PURE__ */ jsx(Fragment, { children: /* @__PURE__ */ jsx("h1", { children: "Home" }) });
+  } else {
+    return /* @__PURE__ */ jsxs(Fragment, { children: [
+      /* @__PURE__ */ jsx("h1", { children: "Home not found" }),
+      /* @__PURE__ */ jsx(Link, { to: "/signin", children: "SignIn" })
+    ] });
+  }
 }
 function About() {
   return /* @__PURE__ */ jsx(Fragment, { children: /* @__PURE__ */ jsx("h1", { children: "About" }) });
@@ -178,7 +188,7 @@ function App() {
       return /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx(Link, { to: path, children: name }) }, path);
     }) }) }),
     /* @__PURE__ */ jsxs(Routes, { children: [
-      /* @__PURE__ */ jsx(Route, { path: "/", element: /* @__PURE__ */ jsx(MyComponent, {}) }, "/"),
+      /* @__PURE__ */ jsx(Route, { path: "/", element: /* @__PURE__ */ jsx(Home, {}) }, "/"),
       /* @__PURE__ */ jsx(Route, { path: "/about", element: /* @__PURE__ */ jsx(About, {}) }, "/about"),
       /* @__PURE__ */ jsx(Route, { path: "/env", element: /* @__PURE__ */ jsx(Env, {}) }, "/env"),
       /* @__PURE__ */ jsx(Route, { path: "/signin", element: /* @__PURE__ */ jsx(SignIn, {}) }, "/signin"),
