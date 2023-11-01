@@ -32,11 +32,13 @@ export function App() {
         </ul>
       </nav>
       <Routes>
-        <Route key={"/"} path="/" element={<Challenge1/>} />
+        <Route key={"/"} path="/" element={<Home/>} />
         <Route key={"/about"} path="/about" element={<About/>} />
         <Route key={"/env"} path="/env" element={<Env/>} />
         <Route key={"/signin"} path="/signin" element={<SignIn/>} />
+        
         <Route key={"/register"} path="/register" element={<Register/>} />
+        <Route key={"/challenge1"} path="/challenge1" element={<Challenge1/>} />
         {/* {routes.map(({ path, component: RouteComp }) => {
           console.log("Path+RouteComp:",path, RouteComp)
           return <Route key={path} path={path} element={<RouteComp />}></Route>
