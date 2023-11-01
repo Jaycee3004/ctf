@@ -140,7 +140,7 @@ function N$1(a, b) {
 function O$1(a) {
   return "object" === typeof a && null !== a && a.$$typeof === l$1;
 }
-function escape$1(a) {
+function escape(a) {
   var b = { "=": "=0", ":": "=2" };
   return "$" + a.replace(/[=:]/g, function(a2) {
     return b[a2];
@@ -148,7 +148,7 @@ function escape$1(a) {
 }
 var P$1 = /\/+/g;
 function Q$1(a, b) {
-  return "object" === typeof a && null !== a && null != a.key ? escape$1("" + a.key) : b.toString(36);
+  return "object" === typeof a && null !== a && null != a.key ? escape("" + a.key) : b.toString(36);
 }
 function R$1(a, b, e, d, c) {
   var k2 = typeof a;
@@ -8615,103 +8615,6 @@ function Env() {
   }
   return /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { children: msg });
 }
-/*! js-cookie v3.0.5 | MIT */
-function assign(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i];
-    for (var key in source) {
-      target[key] = source[key];
-    }
-  }
-  return target;
-}
-var defaultConverter = {
-  read: function(value) {
-    if (value[0] === '"') {
-      value = value.slice(1, -1);
-    }
-    return value.replace(/(%[\dA-F]{2})+/gi, decodeURIComponent);
-  },
-  write: function(value) {
-    return encodeURIComponent(value).replace(
-      /%(2[346BF]|3[AC-F]|40|5[BDE]|60|7[BCD])/g,
-      decodeURIComponent
-    );
-  }
-};
-function init(converter, defaultAttributes) {
-  function set(name, value, attributes) {
-    if (typeof document === "undefined") {
-      return;
-    }
-    attributes = assign({}, defaultAttributes, attributes);
-    if (typeof attributes.expires === "number") {
-      attributes.expires = new Date(Date.now() + attributes.expires * 864e5);
-    }
-    if (attributes.expires) {
-      attributes.expires = attributes.expires.toUTCString();
-    }
-    name = encodeURIComponent(name).replace(/%(2[346B]|5E|60|7C)/g, decodeURIComponent).replace(/[()]/g, escape);
-    var stringifiedAttributes = "";
-    for (var attributeName in attributes) {
-      if (!attributes[attributeName]) {
-        continue;
-      }
-      stringifiedAttributes += "; " + attributeName;
-      if (attributes[attributeName] === true) {
-        continue;
-      }
-      stringifiedAttributes += "=" + attributes[attributeName].split(";")[0];
-    }
-    return document.cookie = name + "=" + converter.write(value, name) + stringifiedAttributes;
-  }
-  function get(name) {
-    if (typeof document === "undefined" || arguments.length && !name) {
-      return;
-    }
-    var cookies = document.cookie ? document.cookie.split("; ") : [];
-    var jar = {};
-    for (var i = 0; i < cookies.length; i++) {
-      var parts = cookies[i].split("=");
-      var value = parts.slice(1).join("=");
-      try {
-        var found = decodeURIComponent(parts[0]);
-        jar[found] = converter.read(value, found);
-        if (name === found) {
-          break;
-        }
-      } catch (e) {
-      }
-    }
-    return name ? jar[name] : jar;
-  }
-  return Object.create(
-    {
-      set,
-      get,
-      remove: function(name, attributes) {
-        set(
-          name,
-          "",
-          assign({}, attributes, {
-            expires: -1
-          })
-        );
-      },
-      withAttributes: function(attributes) {
-        return init(this.converter, assign({}, this.attributes, attributes));
-      },
-      withConverter: function(converter2) {
-        return init(assign({}, this.converter, converter2), this.attributes);
-      }
-    },
-    {
-      attributes: { value: Object.freeze(defaultAttributes) },
-      converter: { value: Object.freeze(converter) }
-    }
-  );
-}
-var api = init(defaultConverter, { path: "/" });
 const fs = {};
 function checkCred(username, password) {
   const p2 = fs.resolve(__dirname, "./../data/userData.json");
@@ -8727,23 +8630,16 @@ function checkCred(username, password) {
 function SignIn() {
   const [username, setUsername] = reactExports.useState("");
   const [password, setPassword] = reactExports.useState("");
-  const form = document.getElementById("loginForm");
-  form.addEventListener("submit", async (e) => {
+  const loginFormRef = reactExports.useRef(null);
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted");
     console.log(username);
     console.log(password);
-    if (checkCred(username, password)) {
-      console.log("Credentials are correct");
-    } else {
-      console.log("Incorrect");
-    }
-    api.set("authenticated", "true", { expires: 7 });
-    console.log("Fetch complete");
-  });
+    console.log(checkCred(username, password));
+  };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { children: "Sign In" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "loginForm", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { id: "loginForm", ref: loginFormRef, onSubmit: handleSubmit, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         "input",
         {
