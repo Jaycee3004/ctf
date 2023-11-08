@@ -9,12 +9,12 @@ import Cookies from "js-cookie";
 import { initializeApp as initializeApp$1, cert } from "firebase-admin/app";
 import { config } from "dotenv";
 const firebaseConfig = {
-  apiKey: "AIzaSyB0L6v3HE3MNxvzc65LtOmHDXViNZ43fX4",
-  authDomain: "ctf-webapp.firebaseapp.com",
-  projectId: "ctf-webapp",
-  storageBucket: "ctf-webapp.appspot.com",
-  messagingSenderId: "140992120654",
-  appId: "1:140992120654:web:3bab9b38ec0a725a23001f"
+  apiKey: process.env.PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.PUBLIC_FIREBASE_AUTHDOMAIN,
+  projectId: process.env.PUBLIC_FIREBASE_PROJECTID,
+  storageBucket: process.env.PUBLIC_FIREBASE_STORAGEBUCKET,
+  messagingSenderId: process.env.PUBLIC_FIREBASE_MESSAGINGSENDERID,
+  appId: process.env.PUBLIC_FIREBASE_APPID
 };
 const app$1 = initializeApp(firebaseConfig);
 async function checkSessionCookie(isAuthenticated, setIsAuthenticated) {
