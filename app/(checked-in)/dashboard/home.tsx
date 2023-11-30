@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 // import firebase from '../firebaseConfig'
-import firebase from '../firebase/clients'
+import firebase from '../../../firebase/clients'
 
 type User = firebase.User;
 
@@ -17,7 +17,7 @@ export default function Home() {
             if (user) {
                 setUser(user);
             } else {
-                router.push('/login');
+                router.push('/signin');
             }
         });
     }, [router]);

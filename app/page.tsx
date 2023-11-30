@@ -1,10 +1,11 @@
-import Home from './home'
+import SignIn from "./(auth)/signin/page"
 
 export default function Page() {
     return (
-        <div>
-            <h1>Page</h1>
-            <Home />
-        </div>
+ 
+    
+                <SignIn></SignIn>
+    
+
     )
 }
