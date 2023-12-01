@@ -18,6 +18,10 @@ export default function RootLayout({
                 <Link href="/dashboard" className="cursor-pointer text-red-500 font-bold hover:text-red-800 px-2 text-lg font-mono">Dashboard</Link>
                 <div className="w-0 group-hover:w-full h-0.5 bg-black ease-in-out duration-200"></div>
             </span>
+            <span className="group inline-block">
+                <Link href="/account" className="cursor-pointer text-red-500 font-bold hover:text-red-800 px-2 text-lg font-mono">Account</Link>
+                <div className="w-0 group-hover:w-full h-0.5 bg-black ease-in-out duration-200"></div>
+            </span>
                 </div>
 
             </div>

@@ -2,9 +2,11 @@
 
 import { redirect } from 'next/dist/server/api-utils';
 import firebase from '../../../firebase/clients'
-import { useState,useEffect } from "react";
-import { useRouter } from 'next/navigation';
+import { useState,useEffect, use } from "react";
+import { useRouter,useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import { recentSignInAtom } from '../../atoms';
+import { useAtomValue,useSetAtom } from 'jotai';
 
 
 export default function SignIn() {
@@ -12,7 +14,12 @@ export default function SignIn() {
   const [password, setPassword] = useState("");
   const [registered, setRegistered] = useState(false); // State to track registration success
   const [error, setError] = useState(null);
+  const plsRedirect = useSearchParams().get('redirect');
+  
+
   const router = useRouter();
+  const recentSignIn = useAtomValue(recentSignInAtom);
+  const setRecentSignIn = useSetAtom(recentSignInAtom);
   // console.log("under execution")
 
   // useEffect(() => {
@@ -28,20 +35,36 @@ export default function SignIn() {
   const handleSignIn = async (e) => {
     e.preventDefault();
     console.log("under execution")
+
+
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
       // Sign-in successful, you can redirect or perform other actions
+
       console.log('Sign-in successful')
-      router.push('/dashboard');
+      setRecentSignIn(true);
+      
+
+      
+      console.log(plsRedirect)
+      let redirectUrl = '/dashboard';
+      if (plsRedirect && plsRedirect === 'account') {
+
+        console.log(plsRedirect);
+        redirectUrl = "/account";
+      }
+      
+      router.push(redirectUrl);
       
     } catch (error) {
+      console.log(error)
       setError(error.message);
     }
   };
 
   return (
     <div >
-      {/* {error && <p>{error}</p>} */}
+      {error && <p>{error}</p>}
       {error && <div className="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
         <svg className="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
           <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
