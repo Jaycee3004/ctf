@@ -1,6 +1,7 @@
 'use client'
 import { useState,useEffect, use } from "react"
 import IntervalChecker from "../intervalChecker"
+import Image from "next/image"
 
 
 
@@ -24,6 +25,12 @@ export default function Challenge1() {
                 <p className="text-gray-100">Hello <span dangerouslySetInnerHTML={createMarkup()}></span></p>
             </div>
             <input type="text" placeholder="Enter your name" onChange={(e) => setName(e.target.value)} />
+            <Image 
+                src="/boxed_cat.gif" 
+                alt="Example" 
+                width={500}  // Set the width
+                height={300} // Set the height
+            />
         </div>
     );
 }
