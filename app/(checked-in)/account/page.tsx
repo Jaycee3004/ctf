@@ -101,11 +101,11 @@ export default function Account() {
                 <button className="flex items-center focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" onClick={() => deleteAccount(router,setDelError,setError)}>Delete Account</button>
                 <div >
       {/* {error && <p>{error}</p>} */}
-      {message !== "" && <div className="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+      {message !== "" && <div className="flex items-center p-4 mb-4 text-sm text-blue-600 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
         
         <span className="sr-only">Info</span>
         <div>
-          <span className="font-medium">Warning !</span> {message}
+          <span className="font-medium">Notice: </span> {message}
         </div>
       </div>}
       
