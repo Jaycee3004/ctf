@@ -64,9 +64,9 @@ export default function Challenge1() {
 
         <div>
                <IntervalChecker/>
-        <div className="flex flex-col h-screen">
+        <div className="flex flex-col h-screen content-denter">
             <div className="p-4">
-            <h1>Challenge 1</h1>
+            <h1 className=" mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-5xl dark:text-black">Challenge 1:  Alert the Cat</h1>
                 {/* <!-- Top bar --> */}
                 <p className="text-gray-100">Hello <span dangerouslySetInnerHTML={createMarkup()}></span></p>
             </div>

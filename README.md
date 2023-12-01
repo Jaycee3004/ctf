@@ -3,11 +3,11 @@
 # Jyotirmay - jchauh3 @ uic dot edu
 
 # Repo: https://github.com/Jaycee3004/ctf.git
-# Deploy: https://ctf-gwjc9zdwd-jaycee3004.vercel.app/signin
+
+# Deploy: ctf-beryl.vercel.app
 
 
-SignIn isn't completely implemented yet. 
-To get a taste of the application, navigate to: /challenge1
+You must signin to visit the website
 
 ## What does your application do?
 Capture The Flag !!!

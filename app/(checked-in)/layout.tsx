@@ -11,7 +11,7 @@ export default function RootLayout({
         <>
         <nav className="bg-gray-100 p-4" >
             <div className="flex items-center">
-                <Link href="/" className="text-red-800 font-bold mr-4">CTF-Haven</Link>
+                <Link href="/" className="text-red-800 font-bold mr-4">(Cat)ture The Flag </Link>
             <div className="flex-grow">
 
             <span className="group inline-block">
@@ -19,11 +19,7 @@ export default function RootLayout({
                 <div className="w-0 group-hover:w-full h-0.5 bg-black ease-in-out duration-200"></div>
             </span>
                 </div>
-                <div>
-                {/* <Link href="/help" className="text-red-800 font-bold hover:text-red-900 px-2">Help</Link> */}
-                {/* <Link href="/chat" className="text-red-800 font-bold hover:text-red-900 px-2">Chat</Link> */}
-                
-                </div>
+
             </div>
         </nav>
         <div className="container mx-auto">
