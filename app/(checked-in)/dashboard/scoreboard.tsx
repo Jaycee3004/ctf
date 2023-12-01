@@ -103,7 +103,7 @@ export default function Scoreboard() {
                                     Topic
                                 </th>
                                 <th scope="col" className="px-6 py-3">
-                                    isCompleted
+                                    IS Completed
                                 </th>
                             </tr>
                         </thead>

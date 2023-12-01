@@ -76,7 +76,7 @@ export default function Account() {
     useEffect(() => {
         setTimeout(() => {
             setMessage("");
-        }, 3000);
+        }, 1000*10);
     },[message])
 
     useEffect(() => {
