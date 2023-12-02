@@ -71,20 +71,21 @@ export default function Challenge2() {
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
-          // Access the window object here
+          
           const win = window;
           window.addEventListener('keydown', function(event){ 
-            console.log(event);
+            
+            // All the shortcuts
             if (event.key == "F12" || ((event.ctrlKey || event.altKey) && (event.code == "KeyI" || event.key == "KeyJ" || event.key == "KeyU"))) {
                 event.preventDefault(); 
                 return false;
             }
         });
+        // Riight click
         window.addEventListener('contextmenu', function(event){ 
             event.preventDefault();
             return false;
         });
-          // Perform any necessary operations with the window object
           console.log(win.innerWidth);
         }
       }, []);
