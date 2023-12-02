@@ -79,11 +79,11 @@ function IntervalChecker() {
             const now = Date.now();
             const timeDiff = now - lastExecutionTime;
 
-            if (timeDiff > 1000) {
+            if (timeDiff > 1300) {
                 console.log(`Time difference is more than 500ms: ${timeDiff}ms`);
                 console.log("ALERT ???")
                 updateScore(user?.uid || "",atomSetter)
-                
+
                 // updateScore("1")
             }
 
