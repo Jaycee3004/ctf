@@ -83,6 +83,7 @@ function IntervalChecker() {
                 console.log(`Time difference is more than 500ms: ${timeDiff}ms`);
                 console.log("ALERT ???")
                 updateScore(user?.uid || "",atomSetter)
+                
                 // updateScore("1")
             }
 
