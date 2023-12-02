@@ -30,17 +30,17 @@ type User = firebase.User;
 //     });
 // }
 
-async function updateScore(uid: string,atomSetter: any) { 
+export async function updateScore(uid: string,atomSetter: any,challengeNum: string) { 
     const db = firebase.firestore();
     const userRef = db.collection('users').doc(uid);
     
     
-
+    const challengeName = "challenge" + challengeNum
     await userRef.get().then((doc) => {
         if (doc.exists) {
             const data = doc.data();
             if (data) {
-                userRef.update({ challenge1: 1 });
+                userRef.update({ [challengeName]: 1 });
                 atomSetter(true)
                 // challengeComplete(true)
             }
@@ -82,7 +82,7 @@ function IntervalChecker() {
             if (timeDiff > 1300) {
                 console.log(`Time difference is more than 500ms: ${timeDiff}ms`);
                 console.log("ALERT ???")
-                updateScore(user?.uid || "",atomSetter)
+                updateScore(user?.uid || "",atomSetter,"1")
 
                 // updateScore("1")
             }

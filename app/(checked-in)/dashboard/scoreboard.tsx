@@ -42,6 +42,7 @@ export default function Scoreboard() {
 
     const [user, setUser] = useState<User | null>(null);
     const [challengeOneDone, setChallengeOneDone] = useState(false)
+    const [challengeTwoDone, setChallengeTwoDone] = useState(false)
     const router = useRouter();
 
     // const [userData, setUserData] = useState();
@@ -76,6 +77,9 @@ export default function Scoreboard() {
                 // console.log("data['challenge1']",data['challenge1'])
                 if (data['challenge1'] === 1) {
                     setChallengeOneDone(true)
+                }
+                if (data['challenge2'] === 1) {
+                    setChallengeTwoDone(true)
                 }
             }
             
@@ -121,6 +125,27 @@ export default function Scoreboard() {
 
                                     }
                                     {  !challengeOneDone &&
+                                    <span className="bg-green-100 text-red-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Incomplete</span>
+
+                                    }
+                                    {/* <span className="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Green</span> */}
+
+                                </td>
+                                
+                            </tr>
+                            <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    <Link href="/challenge2" > Challenge 2</Link>
+                                </th>
+                                <td className="px-6 py-4">
+                                    Anti-Debugging + Cryptography
+                                </td>
+                                <td className="px-6 py-4">
+                                    {  challengeTwoDone &&
+                                    <span className="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Done</span>
+
+                                    }
+                                    {  !challengeTwoDone &&
                                     <span className="bg-green-100 text-red-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Incomplete</span>
 
                                     }

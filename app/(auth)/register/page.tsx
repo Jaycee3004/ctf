@@ -27,7 +27,8 @@ export default function RegisterPage() {
       const userRef = db.collection('users').doc(firebase.auth().currentUser?.uid);
       await userRef.set({
         email: email,
-        challenge1: 0
+        challenge1: 0,
+        challenge2: 0,
       });
       router.push('/dashboard');
     } catch (error) {
